@@ -44,9 +44,9 @@ export default Ember.Route.extend({
   volume: function (volChange) {
     var endpoint = "/down";
     if(volChange > 0) {
-      endpoint = "/up"
+      endpoint = "/up";
     } else if (parseInt(volChange, 10) === 0) {
-      endpoint = "/reset"
+      endpoint = "/reset";
     }
     this._sendRequest("POST", "/volume" + endpoint);
   },
@@ -54,10 +54,10 @@ export default Ember.Route.extend({
     var endpoint = "/play";
     this._sendRequest("POST", endpoint);
   },
-  start: function (act) {
+  start: function () {
     this._sendRequest("POST", "/player/on");
   },
-  stop: function (act) {
+  stop: function () {
     this._sendRequest("POST", "/player/off");
   },
   station: function (station) {
@@ -72,7 +72,7 @@ export default Ember.Route.extend({
       url: baseEndpoint + endpoint,
       type: method.toUpperCase()
     }).then(function (result) {
-      return result
+      return result;
     });
  }
 });
