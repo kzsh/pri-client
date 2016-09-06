@@ -1,0 +1,29 @@
+<h2 id="title">pianobar-rest-interface client</h2>
+<fieldset style="float:left">
+  <button class="paper-button md-default-theme md-button md-raised md-ink-ripple"{{action "play" on="mouseUp"}}>Play/Pause</button>
+</fieldset>
+
+<fieldset style="float:left">
+    <label>Volume</label>
+{{#paper-button raised=true action="volume" param="1" }}+{{/paper-button}}
+{{#paper-button raised=true action="volume" param="-1" }}-{{/paper-button}}
+{{#paper-button raised=true action="volume" param="0" }}reset{{/paper-button}}
+</fieldset>
+
+<fieldset style="float:left">
+    <label>Control Song</label>
+    {{#paper-button raised=true action=""}}Next Song{{/paper-button}}
+    {{#paper-button raised=true action=""}}Tired of song{{/paper-button}}
+</fieldset>
+
+<fieldset style="float:left;clear:left">
+{{#each stations as |station| }}
+<div style="min-width:200px">
+{{#paper-button action="station" param=station.id}}
+<h2>{{station.label}}</h2>
+{{/paper-button}}
+</div>
+{{/each}}
+</fieldset>
+
+{{outlet}}
