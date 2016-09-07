@@ -41,32 +41,35 @@ export default Ember.Route.extend({
  },
 
  actions: {
-  volume: function (volChange) {
-    var endpoint = "/down";
+  play() { this._sendRequest('POST', '/play'); },
+
+  start() { this._sendRequest('POST', '/player/on'); },
+
+  stop() { this._sendRequest('POST', '/player/off'); },
+
+  likeSong() { this._sendRequest('POST', '/song/like'); },
+
+  tiredOfSong() { this._sendRequest('POST', '/song/tired'); },
+
+  nextSong() { this._sendRequest('POST', '/song/next'); },
+
+  banSong() { this._sendRequest('POST', '/song/ban'); },
+
+  station(station) { this._sendRequest('POST', '/stations/' + station); },
+
+  volume(volChange) {
+    var endpoint = '/down';
     if(volChange > 0) {
-      endpoint = "/up";
+      endpoint = '/up';
     } else if (parseInt(volChange, 10) === 0) {
-      endpoint = "/reset";
+      endpoint = '/reset';
     }
-    this._sendRequest("POST", "/volume" + endpoint);
+    this._sendRequest('POST', '/volume' + endpoint);
   },
-  play: function () {
-    var endpoint = "/play";
-    this._sendRequest("POST", endpoint);
-  },
-  start: function () {
-    this._sendRequest("POST", "/player/on");
-  },
-  stop: function () {
-    this._sendRequest("POST", "/player/off");
-  },
-  station: function (station) {
-    this._sendRequest("POST", "/stations/" + station);
-  }
  },
 
  _sendRequest: function (method, endpoint) {
-    var baseEndpoint = "http://localhost:3000";
+    var baseEndpoint = 'http://localhost:3000';
 
     return Ember.$.ajax({
       url: baseEndpoint + endpoint,
