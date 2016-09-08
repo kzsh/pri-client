@@ -22,7 +22,7 @@
   {{#each stations as |station| }}
     <div style="min-width:200px">
       <button class="paper-button md-default-theme md-button md-raised md-ink-ripple" {{action "station" station.id on="mouseUp"}}>
-        <h2>{{station.label}}</h2>
+        <h2>{{station.name}}</h2>
       </button>
     </div>
   {{/each}}

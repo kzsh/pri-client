@@ -1,5 +1,8 @@
 import Ember from 'ember';
 
+const { ajax } = Ember.$;
+const { Promise } = Ember.RSVP;
+
  const stations = [
   {id: 0, label:"90s Pop Radio"},
   {id: 1, label: "Africando All Stars Radio"},
@@ -36,9 +39,13 @@ import Ember from 'ember';
   {id: 32, label: "Symphonic, Classical Period Radio"}
 ];
 export default Ember.Route.extend({
- setupController(controller) {
-  controller.stations = stations;
- },
+  model() {
+    return this.store.findAll('station');
+  },
+
+  setupController(controller, model) {
+    controller.stations = model;
+  },
 
  actions: {
   play() { this._sendRequest('POST', '/play'); },
