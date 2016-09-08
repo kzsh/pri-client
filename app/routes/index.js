@@ -78,11 +78,15 @@ export default Ember.Route.extend({
  _sendRequest: function (method, endpoint) {
     var baseEndpoint = 'http://localhost:3000';
 
-    return Ember.$.ajax({
-      url: baseEndpoint + endpoint,
-      type: method.toUpperCase()
-    }).then(function (result) {
-      return result;
+    return new Promise(function(resolve, reject) {
+      ajax({
+        url: baseEndpoint + endpoint,
+        type: method.toUpperCase()
+      }).then(function(data) {
+        return resolve(data);
+      }, function(error) {
+        return reject(error);
+      });
     });
  }
 });
